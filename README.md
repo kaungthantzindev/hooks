@@ -19,21 +19,35 @@ Import and use a hook in your React component:
 ### useHashState
 
 This hook synchronizes a React state with the URL's hash, making it perfect for scenarios where you need the state to be reflected and controlled via the URL.
+
 ```javascript
-    import { useHashState } from '@kaungthantzindev/hooks';
+import { useHashState } from "@kaungthantzindev/hooks";
 
-    function MyComponent() {
-      const [value, setValue, clearValue] = useHashState('myKey');
+function MyComponent() {
+  const [value, setValue, clearValue] = useHashState("myKey", {
+    initialValue: "default",
+    encode: (val) => btoa(val), // Base64 encode
+    decode: (val) => atob(val), // Base64 decode
+    debounce: 300,
+    syncWithSessionStorage: true,
+    onHashChange: (newValue, oldValue) => {
+      console.log("Hash changed from", oldValue, "to", newValue);
+    },
+    errorHandler: (error) => {
+      console.error("Error with hash state:", error);
+    },
+  });
 
-      return (
-        <div>
-          <p>Value: {value}</p>
-          <button onClick={() => setValue('newValue')}>Set New Value</button>
-          <button onClick={() => clearValue()}>Clear Value</button>
-        </div>
-      );
-    }
+  return (
+    <div>
+      <p>Value: {value}</p>
+      <button onClick={() => setValue("newValue")}>Set New Value</button>
+      <button onClick={clearValue}>Clear Value</button>
+    </div>
+  );
+}
 ```
+
 ## Features
 
 - **Flexibility**: Each hook is built to be flexible, allowing you to integrate it smoothly into your existing React application.
