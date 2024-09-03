@@ -48,6 +48,36 @@ function MyComponent() {
 }
 ```
 
+### useGoogleLogin
+
+`useGoogleLogin` is an easy-to-use hook that brings Google login functionality to your React app. It handles both id_token and access_token retrieval, making the authentication process smooth and straightforward.
+
+```javascript
+import { useGoogleLogin } from "@kaungthantzindev/hooks";
+
+function LoginComponent() {
+  const { initiateLogin, isLoading } = useGoogleLogin({
+    clientId: "YOUR_GOOGLE_CLIENT_ID",
+    redirectUri: "http://localhost:3000",
+    onSuccess: (idToken, accessToken) => {
+      console.log("Login successful!", { idToken, accessToken });
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+    },
+  });
+
+  return (
+    <div>
+      <button onClick={initiateLogin} disabled={isLoading}>
+        Login with Google
+      </button>
+      {isLoading && <p>Loading...</p>}
+    </div>
+  );
+}
+```
+
 ## Features
 
 - **Flexibility**: Each hook is built to be flexible, allowing you to integrate it smoothly into your existing React application.
@@ -57,6 +87,7 @@ function MyComponent() {
 ## Available Hooks
 
 - **useHashState**: Synchronize your component's state with the browser's URL hash.
+- **useGoogleLogin**: A simple hook to integrate Google login with support for id_token and access_token retrieval.
 
 ## Contributing
 
@@ -88,6 +119,7 @@ Kaung Thant Zin - mr.kaungthantzin@gmail.com
 - Hooks
 - hooks collection
 - useHashState
+- useGoogleLogin
 
 ## Repository
 
