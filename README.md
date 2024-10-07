@@ -12,6 +12,12 @@ Or with yarn:
 
     yarn add @kaungthantzindev/hooks
 
+## Available Hooks
+
+- **useHashState**: Synchronize your component's state with the browser's URL hash.
+- **useGoogleLogin**: A simple hook to integrate Google login with support for id_token and access_token retrieval.
+- **useAppleLogin**: Simplify Apple login integration, supporting both authorization code and id_token responses.
+
 ## Usage
 
 Import and use a hook in your React component:
@@ -78,16 +84,41 @@ function LoginComponent() {
 }
 ```
 
+### useAppleLogin
+
+`useAppleLogin` simplifies integrating Apple login into your React app. It helps retrieve authorization codes or ID tokens for authentication.
+
+```javascript
+import { useAppleLogin } from "@kaungthantzindev/hooks";
+
+function AppleLoginComponent() {
+  const { initiateLogin, isLoading } = useAppleLogin({
+    clientId: "YOUR_APPLE_CLIENT_ID",
+    redirectUri: "http://localhost:3000",
+    onSuccess: (code, idToken) => {
+      console.log("Login successful!", { code, idToken });
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+    },
+  });
+
+  return (
+    <div>
+      <button onClick={initiateLogin} disabled={isLoading}>
+        Login with Apple
+      </button>
+      {isLoading && <p>Loading...</p>}
+    </div>
+  );
+}
+```
+
 ## Features
 
 - **Flexibility**: Each hook is built to be flexible, allowing you to integrate it smoothly into your existing React application.
 - **TypeScript Support**: Full TypeScript support ensures that you can leverage strong typing and reduce runtime errors.
 - **Easy Integration**: Designed to be easy to integrate and use with comprehensive examples and documentation.
-
-## Available Hooks
-
-- **useHashState**: Synchronize your component's state with the browser's URL hash.
-- **useGoogleLogin**: A simple hook to integrate Google login with support for id_token and access_token retrieval.
 
 ## Contributing
 
@@ -120,6 +151,7 @@ Kaung Thant Zin - mr.kaungthantzin@gmail.com
 - hooks collection
 - useHashState
 - useGoogleLogin
+- useAppleLogin
 
 ## Repository
 

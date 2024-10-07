@@ -25,6 +25,7 @@
     "hooks collection",
     "useHashState",
     "useGoogleLogin",
+    "useAppleLogin",
     "kaungthantzindev"
   ],
   "author": "Kaung Thant Zin mr.kaungthantzin@gmail.com",

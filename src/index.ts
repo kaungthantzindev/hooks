@@ -3,3 +3,5 @@ export type { UseHashStateOptions, UseHashStateReturn } from "./useHashState";
 
 export { default as useGoogleLogin } from "./useGoogleLogin";
 export type { UseGoogleLoginParams, ParsedHashParams } from "./useGoogleLogin";
+
+export { default as useAppleLogin } from "./useAppleLogin";
